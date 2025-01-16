@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  default:
+    name: "InfluxDB3 Action CI"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Setup InfluxDB3
+        id: setup-influxdb3
+        uses: ./
+        with:
+          influxdb3_database: sensordata
+          influxdb3_create_token: true
+
+      - name: List databases
+        shell: bash
+        run: |
+          echo "Version:"
+          docker exec influxdb3 influxdb3 --version
+          echo "Databases:"
+          docker exec influxdb3 influxdb3 show databases

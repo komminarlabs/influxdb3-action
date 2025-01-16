@@ -1,2 +1,21 @@
 # influxdb3-action
-A GitHub action for installing and configuring InfluxDB 3 Core
+
+This action installs and configures [InfluxDB3 core](https://docs.influxdata.com/influxdb3/core/).
+
+# Usage
+
+See [action.yaml](action.yaml)
+
+## Setup and configure InfluxDB3
+
+```yaml
+steps:
+  - name: Check out repo
+    uses: actions/checkout@v4
+
+  - name: Setup InfluxDB3
+    uses: komminarlabs/influxdb3-action@v0
+    with:
+      influxdb3_database: sensordata
+      influxdb3_create_token: true
+```
